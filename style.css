@@ -29,6 +29,23 @@ p {
     padding: 16px 16px;
 }
 
+.add-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-card > button {
+    width: 50%;
+    height: 50%;
+    font-size: 4.5rem;
+    font-weight: bold;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.897);
+    background-color: rgb(255, 254, 199);
+}
+
 .top {
     text-align: center;
 }

@@ -36,6 +36,10 @@ function displayBooks() {
         card.innerHTML = `<div class="top"><p>${book.title}</p><p>${book.author}</p></div><div class="middle"><button>I read it</button><button>Remove</button></div><div class="bottom"><p>${book.isReadText()}</p><p>${book.pages}</p></div>`
         cardContainer.append(card);
     });
+    const addBtn = document.createElement("div");
+    addBtn.classList.add("add-card");
+    addBtn.innerHTML = `<button>+</button>`;
+    cardContainer.append(addBtn);
 }
 
 
