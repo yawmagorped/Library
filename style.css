@@ -60,3 +60,7 @@ p {
     display: flex;
     justify-content: space-around;
 }
+
+.middle > :nth-child(2) {
+    background-color: red;
+}
