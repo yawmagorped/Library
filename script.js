@@ -7,7 +7,7 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
     this.isReadText = function() {
         let isReadTxt;
-        if(isRead)
+        if(this.isRead)
             isReadTxt = "has read";
         else
             isReadTxt = "not read yet";
@@ -24,7 +24,7 @@ const cards =[];
 Book.prototype.displayBook = function() {
     let card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `<div class="top"><p>${this.title}</p><p>${this.author}</p></div><div class="middle" data-id="${this.id}"><button>I read it</button><button>Remove</button></div><div class="bottom"><p>${this.isReadText()}</p><p>${this.pages}</p></div>`
+    card.innerHTML = `<div class="top"><p>${this.title}</p><p>${this.author}</p></div><div class="middle" data-id="${this.id}"><button>Chage read status</button><button>Remove</button></div><div class="bottom"><p data-p-id="${this.id}">${this.isReadText()}</p><p>${this.pages}</p></div>`
     cards.push(card);
     cardContainer.append(card);
     this.card = card; 
@@ -64,6 +64,7 @@ addBtn.addEventListener('click', () => {
 });
 
 let btn;
+let p;
 
 myLibrary.forEach(book => {
     btn = document.querySelector(`[data-id="${book.id}"] > :last-child`);
@@ -73,8 +74,9 @@ myLibrary.forEach(book => {
     btn = document.querySelector(`[data-id="${book.id}"] > :first-child`);
     btn.addEventListener('click', () => {
         book.isRead = !book.isRead;
-        book.card.innerHTML = `<div class="top"><p>${book.title}</p><p>${book.author}</p></div><div class="middle" data-id="${book.id}"><button>I read it</button><button>Remove</button></div><div class="bottom"><p>${book.isReadText()}</p><p>${book.pages}</p></div>`
-        updateCard(book.card);
+        p = document.querySelector(`[data-p-id="${book.id}"]`);
+        console.log(book.isReadText());
+        p.textContent = book.isReadText();
     });
 });
 
@@ -89,10 +91,4 @@ function updateBooks() {
 
 function addForm() {
 
-}
-
-function updateCard(card) {
-    newcard = card;
-    cardContainer.insertBefore(newcard, card);
-    card.remove();
 }
