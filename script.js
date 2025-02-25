@@ -67,6 +67,10 @@ let btn;
 let p;
 
 myLibrary.forEach(book => {
+    addBtnEventListeners(book);
+});
+
+function addBtnEventListeners(book) {
     btn = document.querySelector(`[data-id="${book.id}"] > :last-child`);
     btn.addEventListener('click', () => {
         book.removeBook()
@@ -78,8 +82,8 @@ myLibrary.forEach(book => {
         console.log(book.isReadText());
         p.textContent = book.isReadText();
     });
-});
 
+}
 function updateBooks() {
     if (isFormActive) {
         addForm();
@@ -89,6 +93,78 @@ function updateBooks() {
     cardContainer.append(addBtn);
 }
 
-function addForm() {
+const form = document.createElement("form");
+form.classList.add("card-form")
+form.innerHTML = `
+        <form class="card-form">
+            <div class="top-form">
+                <input type="text" name="input-title">
+                <input type="text" name="input-author">
+            </div>
 
+            <div class="middle-form">
+                <button>Submit</button>
+                <button>Close</button>
+            </div>
+
+            <div class="bottom-form">
+                <div class="isRead-form">
+                    <div class="isRead-form-top">
+                        <label for="has-read">has read</label>
+                        <input type="radio" id="has-read" name="read-status" value="true">
+                    </div>
+                    <div class="isRead-form-bottom">
+                        <label for="hasnt-read">hasn't read</label>
+                        <input type="radio" id="hasnt-read" name="read-status" value="false">
+                    </div>
+                </div>
+                <input type="number" name="input-pages">
+            </div>
+        </form>
+`
+let submitBtn;
+let closeBtn; 
+let titleInput;
+let authorInput;
+let pagesInput;
+
+
+let isInitialized = false;
+function addForm() {
+    cardContainer.append(form);
+    if(!isInitialized) {
+        submitBtn = document.querySelector(".middle-form > :first-child");
+        closeBtn = document.querySelector(".middle-form > :last-child");
+        titleInput = document.querySelector(".top-form > :first-child");
+        authorInput = document.querySelector(".top-form > :last-child");
+        pagesInput = document.querySelector('[name="input-pages"]');
+        submitBtn.addEventListener('click', (event) => {
+            submit();
+        });
+        closeBtn.addEventListener('click', (event) => {
+            closeForm();
+        });
+        isInitialized = true;
+    }
+}
+
+
+
+function submit() {
+    let isReadInputs = document.querySelector(".isRead-form input:checked");
+    
+    let readBool 
+    if(isReadInputs.value = "true")
+        readBool = true;
+    else
+        readBool = false;
+
+    let newBook = addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readBool);
+    addBtnEventListeners(newBook);
+    closeForm();
+    updateBooks();
+}
+function closeForm() {
+    isFormActive = false;
+    form.remove();
 }

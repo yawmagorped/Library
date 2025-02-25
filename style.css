@@ -20,7 +20,7 @@ p {
     padding: 0 10%;
 }
 
-.card {
+.card, .card-form {
     background-color: beige;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.315);
@@ -52,15 +52,41 @@ p {
     text-align: center;
 }
 
+.top-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-form > *{
+    width: 90%;
+    text-align: center;
+}
+
+.top-form :first-child {
+    height: 2rem;
+    font-size: 2rem;
+}
+
 .top :first-child {
     font-size: 2rem;
 }
 
-.middle, .bottom {
+.isRead-form {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 }
 
-.middle > :nth-child(2) {
+.middle, .bottom, .bottom-form, .middle-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.middle > :nth-child(2), .middle-form > :nth-child(2) {
     background-color: red;
+}
+
+[name="input-pages"] {
+    width: 60px;
 }
