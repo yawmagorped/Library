@@ -1,17 +1,33 @@
 const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.isReadText = function() {
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+    isReadText = function () {
         let isReadTxt;
-        if(this.isRead)
+        if (this.isRead)
             isReadTxt = "has read";
+
         else
             isReadTxt = "not read yet";
         return isReadTxt;
+    };
+    displayBook() {
+        let card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `<div class="top"><p>${this.title}</p><p>${this.author}</p></div><div class="middle" data-id="${this.id}"><button>Chage read status</button><button>Remove</button></div><div class="bottom"><p data-p-id="${this.id}">${this.isReadText()}</p><p>${this.pages}</p></div>`;
+        cards.push(card);
+        cardContainer.append(card);
+        this.card = card;
+    }
+    removeBook() {
+        this.card.remove();
+        let index = myLibrary.indexOf(this);
+        myLibrary.splice(index, 1);
     }
 }
 
@@ -21,20 +37,7 @@ const addBtn = document.createElement("div");
 let isFormActive = false;
 const cards =[];
 
-Book.prototype.displayBook = function() {
-    let card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = `<div class="top"><p>${this.title}</p><p>${this.author}</p></div><div class="middle" data-id="${this.id}"><button>Chage read status</button><button>Remove</button></div><div class="bottom"><p data-p-id="${this.id}">${this.isReadText()}</p><p>${this.pages}</p></div>`
-    cards.push(card);
-    cardContainer.append(card);
-    this.card = card; 
-}
 
-Book.prototype.removeBook = function() {
-    this.card.remove();
-    let index = myLibrary.indexOf(this);
-    myLibrary.splice(index, 1);
-}
 
 let id = 0;
 
