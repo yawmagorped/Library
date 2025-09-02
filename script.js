@@ -101,8 +101,8 @@ form.classList.add("card-form")
 form.innerHTML = `
         <form class="card-form">
             <div class="top-form">
-                <input type="text" name="input-title">
-                <input type="text" name="input-author">
+                <input type="text" name="input-title" required >
+                <input type="text" name="input-author" required >
             </div>
 
             <div class="middle-form">
@@ -114,14 +114,14 @@ form.innerHTML = `
                 <div class="isRead-form">
                     <div class="isRead-form-top">
                         <label for="has-read">has read</label>
-                        <input type="radio" id="has-read" name="read-status" value="true">
+                        <input type="radio" id="has-read" name="read-status" value="true" checked >
                     </div>
                     <div class="isRead-form-bottom">
                         <label for="hasnt-read">hasn't read</label>
                         <input type="radio" id="hasnt-read" name="read-status" value="false">
                     </div>
                 </div>
-                <input type="number" name="input-pages">
+                <input type="number" name="input-pages" required >
             </div>
         </form>
 `
@@ -142,6 +142,23 @@ function addForm() {
         authorInput = document.querySelector(".top-form > :last-child");
         pagesInput = document.querySelector('[name="input-pages"]');
         submitBtn.addEventListener('click', (event) => {
+            titleInput.reportValidity();
+            if (titleInput.validity.valueMissing) {
+                titleInput.setCustomValidity("enter a title");
+                return;
+            }   else 
+                titleInput.setCustomValidity("");
+            if (authorInput.validity.valueMissing) {
+                authorInput.setCustomValidity("enter the author name");
+                return;
+            }   else 
+                authorInput.setCustomValidity("");            
+            if (pagesInput.validity.valueMissing) {
+                pagesInput.setCustomValidity("enter number of pages");
+                return;
+            }   else 
+                pagesInput.setCustomValidity("");
+
             submit();
         });
         closeBtn.addEventListener('click', (event) => {
